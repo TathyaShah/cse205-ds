@@ -1,0 +1,25 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result=new ArrayList<>();
+        if(numRows==0){
+            return result;
+        }
+        List<Integer> first=new ArrayList<>();
+        first.add(1);
+        result.add(first);
+        if(numRows==1){
+            return result;
+        }
+        for(int i=1;i<numRows;i++){
+            List<Integer> previous=result.get(i-1);
+            List<Integer> current=new ArrayList<>();
+            current.add(1);
+            for(int j=0;j<i-1;j++){
+                current.add(previous.get(j)+previous.get(j+1));
+            }
+            current.add(1);
+            result.add(current);
+        }
+        return result;
+    }
+}
