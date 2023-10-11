@@ -1,0 +1,18 @@
+class Solution {
+    public int findNonMinOrMax(int[] nums) {
+        Arrays.sort(nums);
+        int idx=1;
+        for(int i=0;i<nums.length-1;i++){
+            if(nums.length==2){
+                return -1;
+            }
+            if(nums[i]!=nums[i+idx]){
+                return nums[i+idx];
+            }
+            else{
+                idx++;
+            }
+        }
+        return -1;
+    }
+}
