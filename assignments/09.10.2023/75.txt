@@ -1,0 +1,33 @@
+class Solution {
+    private int partition(int[] nums, int lt, int rt) {
+        int pivot = nums[rt];
+        int i = lt-1;
+        for(int j=lt; j <= rt-1; j++) {
+            if(nums[j] < pivot) {
+                i++;
+                int t = nums[i];
+                nums[i] = nums[j];
+                nums[j] = t;
+            }
+        }
+        int t = nums[i+1];
+        nums[i+1] = nums[rt];
+        nums[rt] = t;
+        return (i+1);
+    }
+    
+    private int[] quickSort(int[] nums, int lt, int rt) {
+        if(lt < rt) {
+            int mid = partition(nums, lt, rt);
+            quickSort(nums, lt, mid-1);
+            quickSort(nums, mid+1, rt);
+        }
+        return nums;
+    }
+    
+    public void sortColors(int[] nums) {
+        int lt = 0;
+        int rt = nums.length-1;
+        nums = quickSort(nums, lt, rt);
+    }
+}

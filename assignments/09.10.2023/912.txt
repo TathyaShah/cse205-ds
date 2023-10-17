@@ -1,0 +1,48 @@
+class Solution {
+    public int[] sortArray(int[] nums) {
+        int n=nums.length;
+        divide(nums,0,n-1);
+        return nums;
+    }
+    void divide(int[] nums, int l, int r){
+        if(l>=r){
+            return;
+        }
+        int mid=l+(r-l)/2;
+        divide(nums, l, mid);
+        divide(nums, mid+1,r);
+        conquer(nums, l, r, mid);
+    }
+    void conquer(int[] nums, int l, int r, int mid){
+        int[] merge=new int[r-l+1];
+        int i1=l;
+        int i2=mid+1;
+        int i=0;
+        while(i1<=mid && i2<=r){
+            if(nums[i1]<=nums[i2]){
+                merge[i]=nums[i1];
+                i1++;
+                i++;
+            }
+            else{
+                merge[i]=nums[i2];
+                i++;
+                i2++;
+            }
+        }
+        while(i1<=mid){
+            merge[i]=nums[i1];
+            i++;
+            i1++;
+        }
+        while(i2<=r){
+            merge[i]=nums[i2];
+            i++;
+            i2++;
+        }
+        for(int j=0;j<merge.length;j++){
+            nums[l+j]=merge[j];
+        }
+        // return nums;
+    }
+}
