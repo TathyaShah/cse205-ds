@@ -1,0 +1,34 @@
+class Solution {
+    public boolean isNStraightHand(int[] hand, int groupSize) {
+        if(hand.length%groupSize!=0){
+            return false;
+        }
+        HashSet<Integer> set=new HashSet<>();
+        for(int i=0;i<hand.length;i++){
+            set.add(hand[i]);
+        }
+        int[] arr=new int[set.size()];
+        int j=0;
+        for(int x:set){
+            arr[j++]=x;
+        }
+        int cont=0;
+        Arrays.sort(arr);
+        for(int i=0;i<arr.length-1;i++){
+            if(arr[i]+1==arr[i+1]){
+                cont++;
+                continue;
+            }
+            else{
+                if(cont+1<groupSize){
+                    return false;
+                }
+                cont=0;
+            }
+        }
+        if(cont+1<groupSize){
+            return false;
+        }
+        return true;
+    }
+}
